@@ -12,26 +12,23 @@
     <a href="index.html">Dashboard</a>
     <a class="active" href="jobs.html">Jobs</a>
     <a href="create-job.html">Create Job</a>
-
     <h3>Admin</h3>
     <a href="admin.html">Admin Panel</a>
 </div>
 
 <div class="main">
     <h1>All Jobs</h1>
-
     <table>
-        <tr>
-            <th>Job Name</th>
-            <th>Burst Time</th>
-            <th>Priority</th>
-            <th>Status</th>
-        </tr>
-
-        <!-- JOBS WILL BE LOADED HERE -->
-        <tbody class="jobs-table-body"></tbody>
+        <thead>
+            <tr>
+                <th>Job Name</th>
+                <th>Burst Time</th>
+                <th>Priority</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody id="jobsTable"></tbody>
     </table>
-
 </div>
 
 <script src="script.js"></script>
