@@ -1,61 +1,150 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif;
+}
 
-<div class="sidebar">
-    <h2>JobScheduler</h2>
-    <a href="index.html">Dashboard</a>
-    <a href="jobs.html">Jobs</a>
-    <a href="create-job.html">Create Job</a>
+/* ===== Layout ===== */
+body {
+    display: flex;
+    background: #f5f7fb;
+}
 
-    <h3>Admin</h3>
-    <a class="active" href="admin.html">Admin Panel</a>
-</div>
+/* ===== Sidebar ===== */
+.sidebar {
+    width: 240px;
+    background: #ffffff;
+    height: 100vh;
+    padding: 25px;
+    border-right: 1px solid #ddd;
+}
 
-<div class="main">
-    <header>
-        <h1>Admin Panel</h1>
-    </header>
+.sidebar h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #6a4ff7;
+    margin-bottom: 25px;
+}
 
-    <div class="cards">
-        <div class="card purple">
-            <h3>Total Jobs</h3>
-            <p class="value" id="adminTotal">0</p>
-        </div>
+.sidebar a {
+    display: block;
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #333;
+    font-size: 15px;
+    transition: 0.2s;
+}
 
-        <div class="card green">
-            <h3>Completed Jobs</h3>
-            <p class="value" id="adminCompleted">0</p>
-        </div>
+.sidebar .active,
+.sidebar a:hover {
+    background: #ece9ff;
+    color: #6a4ff7;
+}
 
-        <div class="card blue">
-            <h3>Pending Jobs</h3>
-            <p class="value" id="adminPending">0</p>
-        </div>
-    </div>
+.sidebar h3 {
+    margin-top: 30px;
+    color: #777;
+    font-size: 14px;
+}
 
-    <div class="section">
-        <h2>All Jobs (Admin View)</h2>
-        <table>
-            <tr>
-                <th>Job Name</th>
-                <th>Burst Time</th>
-                <th>Priority</th>
-                <th>Status</th>
-                <th>Created</th>
-            </tr>
+/* ===== Main ===== */
+.main {
+    flex: 1;
+    padding: 35px;
+}
 
-            <tbody class="admin-table-body"></tbody>
-        </table>
-    </div>
-</div>
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
 
-<script src="script.js"></script>
-</body>
-</html>
+.add-btn {
+    background: #6a4ff7;
+    padding: 10px 20px;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.add-btn:hover {
+    background: #5a3ee6;
+}
+
+/* ===== Cards ===== */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+}
+
+.card {
+    background: #fff;
+    padding: 22px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.07);
+}
+
+.card h3 {
+    color: #777;
+    font-size: 17px;
+}
+
+.card .value {
+    font-size: 32px;
+    font-weight: 700;
+    margin: 10px 0;
+}
+
+.trend {
+    font-size: 14px;
+    color: #999;
+}
+
+/* Colors */
+.purple { border-left: 6px solid #7c4dff; }
+.green { border-left: 6px solid #28c76f; }
+.blue { border-left: 6px solid #1e90ff; }
+.yellow { border-left: 6px solid #ffb300; }
+
+/* ===== Sections ===== */
+.section {
+    background: #fff;
+    margin-top: 35px;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.07);
+}
+
+.section h2 {
+    margin-bottom: 15px;
+}
+
+/* ===== Table ===== */
+table {
+    width: 100%;
+    margin-top: 10px;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    padding: 14px 12px;
+    border-bottom: 1px solid #eee;
+    text-align: left;
+}
+
+.no-chart {
+    padding: 40px;
+    text-align: center;
+    background: #fafafa;
+    border-radius: 12px;
+    color: #777;
+}
