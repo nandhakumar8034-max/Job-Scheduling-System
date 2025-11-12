@@ -12,8 +12,9 @@
     <a href="index.html">Dashboard</a>
     <a href="jobs.html">Jobs</a>
     <a class="active" href="create-job.html">Create Job</a>
+
     <h3>Admin</h3>
-    <a href="#">Admin Panel</a>
+    <a href="admin.html">Admin Panel</a>
 </div>
 
 <div class="main">
@@ -21,13 +22,13 @@
 
     <form id="jobForm">
         <label>Job Name</label>
-        <input type="text" id="jobName">
+        <input type="text" id="jobName" required>
 
         <label>Burst Time</label>
-        <input type="number" id="burstTime">
+        <input type="number" id="burstTime" required>
 
         <label>Priority</label>
-        <input type="number" id="priority">
+        <input type="number" id="priority" required>
 
         <button type="submit" class="add-btn">Add Job</button>
     </form>
