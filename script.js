@@ -61,6 +61,8 @@ function startJob(i) {
     jobs[i].status = "Running";
     localStorage.setItem("jobs", JSON.stringify(jobs));
     loadJobs();
+    loadAdminJobs();
+    updateDashboard();
 }
 
 function completeJob(i) {
@@ -68,6 +70,8 @@ function completeJob(i) {
     jobs[i].status = "Completed";
     localStorage.setItem("jobs", JSON.stringify(jobs));
     loadJobs();
+    loadAdminJobs();
+    updateDashboard();
 }
 
 function deleteJob(i) {
@@ -75,17 +79,21 @@ function deleteJob(i) {
     jobs.splice(i, 1);
     localStorage.setItem("jobs", JSON.stringify(jobs));
     loadJobs();
+    loadAdminJobs();
+    updateDashboard();
 }
 
 
 // DASHBOARD
-const totalJobs = document.getElementById("totalJobs");
-const completedJobs = document.getElementById("completedJobs");
-const runningJobs = document.getElementById("runningJobs");
-const successRate = document.getElementById("successRate");
-const recentJobs = document.getElementById("recentJobs");
+function updateDashboard() {
+    const totalJobs = document.getElementById("totalJobs");
+    const completedJobs = document.getElementById("completedJobs");
+    const runningJobs = document.getElementById("runningJobs");
+    const successRate = document.getElementById("successRate");
+    const recentJobs = document.getElementById("recentJobs");
 
-if (totalJobs) {
+    if (!totalJobs) return; // Not on dashboard
+
     const jobs = JSON.parse(localStorage.getItem("jobs") || "[]");
 
     totalJobs.innerText = jobs.length;
@@ -112,3 +120,33 @@ if (totalJobs) {
         `;
     });
 }
+
+updateDashboard();
+
+
+// ADMIN PANEL SUPPORT
+const adminTable = document.getElementById("adminJobsTable");
+
+if (adminTable) {
+    loadAdminJobs();
+}
+
+function loadAdminJobs() {
+    if (!adminTable) return;
+
+    const jobs = JSON.parse(localStorage.getItem("jobs") || "[]");
+
+    adminTable.innerHTML = "";
+
+    jobs.forEach(job => {
+        adminTable.innerHTML += `
+            <tr>
+                <td>${job.name}</td>
+                <td>${job.burst}</td>
+                <td>${job.priority}</td>
+                <td>${job.status}</td>
+            </tr>
+        `;
+    });
+}
+
