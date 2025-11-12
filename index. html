@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobScheduler Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="sidebar">
+    <h2>JobScheduler</h2>
+    <a class="active">Dashboard</a>
+    <a>Jobs</a>
+    <a>Create Job</a>
+    <h3>Admin</h3>
+    <a>Admin Panel</a>
+</div>
+
+<div class="main">
+    <header>
+        <h1>Dashboard</h1>
+        <button class="add-btn">+ Create New Job</button>
+    </header>
+
+    <div class="cards">
+        <div class="card purple">
+            <h3>Total Jobs</h3>
+            <p class="value">0</p>
+            <span class="trend">+12% vs last week</span>
+        </div>
+
+        <div class="card green">
+            <h3>Completed</h3>
+            <p class="value">0</p>
+            <span class="trend">+8% vs last week</span>
+        </div>
+
+        <div class="card blue">
+            <h3>Running</h3>
+            <p class="value">0</p>
+        </div>
+
+        <div class="card yellow">
+            <h3>Success Rate</h3>
+            <p class="value">0%</p>
+            <span class="trend">+5% vs last week</span>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Recent Jobs</h2>
+
+        <table>
+            <tr>
+                <th>Job Name</th>
+                <th>Status</th>
+                <th>Priority</th>
+                <th>Next Run</th>
+                <th>Created</th>
+                <th>Actions</th>
+            </tr>
+
+            <tr>
+                <td colspan="6" style="text-align:center; padding:20px;">
+                    No jobs found. Create your first job to get started!
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>Job Status Distribution</h2>
+        <div class="no-chart">
+            No job data available
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
