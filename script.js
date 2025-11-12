@@ -1,6 +1,7 @@
-// Safe script that works on ALL pages without errors
+// -------------------------------------
+// CREATE JOB PAGE (create-job.html)
+// -------------------------------------
 
-// Handle Create Job form (only exists on create-job.html)
 const form = document.getElementById("jobForm");
 if (form) {
     form.addEventListener("submit", function (event) {
@@ -16,7 +17,8 @@ if (form) {
             name,
             burst,
             priority,
-            status: "Pending"
+            status: "Pending",
+            created: new Date().toLocaleString()
         });
 
         localStorage.setItem("jobs", JSON.stringify(jobs));
@@ -26,32 +28,36 @@ if (form) {
     });
 }
 
-// Load jobs table (only on jobs.html)
+
+
+// -------------------------------------
+// JOBS PAGE (jobs.html)
+// -------------------------------------
+
 const jobsTable = document.querySelector(".jobs-table-body");
 if (jobsTable) {
     const jobs = JSON.parse(localStorage.getItem("jobs") || "[]");
 
     jobsTable.innerHTML = "";
 
-    jobs.forEach(job => {
-        jobsTable.innerHTML += `
+    if (jobs.length === 0) {
+        jobsTable.innerHTML = `
             <tr>
-                <td>${job.name}</td>
-                <td>${job.burst}</td>
-                <td>${job.priority}</td>
-                <td>${job.status}</td>
+                <td colspan="4" style="text-align:center; padding:20px;">
+                    No jobs created yet.
+                </td>
             </tr>
         `;
-    });
-}
-
-// Dashboard updates (only exist on index.html)
-const totalJobsBox = document.querySelector("#totalJobs");
-const completedJobsBox = document.querySelector("#completedJobs");
-
-if (totalJobsBox && completedJobsBox) {
-    const jobs = JSON.parse(localStorage.getItem("jobs") || "[]");
-
-    totalJobsBox.innerText = jobs.length;
-    completedJobsBox.innerText = jobs.filter(j => j.status === "Completed").length;
+    } else {
+        jobs.forEach(job => {
+            jobsTable.innerHTML += `
+                <tr>
+                    <td>${job.name}</td>
+                    <td>${job.burst}</td>
+                    <td>${job.priority}</td>
+                    <td>${job.status}</td>
+                </tr>
+            `;
+        });
+    }
 }
