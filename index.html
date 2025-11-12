@@ -19,37 +19,37 @@
     <a href="admin.html">Admin Panel</a>
 </div>
 
-
 <div class="main">
     <header>
         <h1>Dashboard</h1>
         <a href="create-job.html" class="add-btn">+ Create New Job</a>
-
     </header>
 
     <div class="cards">
+
         <div class="card purple">
             <h3>Total Jobs</h3>
-            <p class="value">0</p>
+            <p class="value" id="totalJobs">0</p>
             <span class="trend">+12% vs last week</span>
         </div>
 
         <div class="card green">
             <h3>Completed</h3>
-            <p class="value">0</p>
+            <p class="value" id="completedJobs">0</p>
             <span class="trend">+8% vs last week</span>
         </div>
 
         <div class="card blue">
             <h3>Running</h3>
-            <p class="value">0</p>
+            <p class="value" id="runningJobs">0</p>
         </div>
 
         <div class="card yellow">
             <h3>Success Rate</h3>
-            <p class="value">0%</p>
+            <p class="value" id="successRate">0%</p>
             <span class="trend">+5% vs last week</span>
         </div>
+
     </div>
 
     <div class="section">
@@ -65,11 +65,9 @@
                 <th>Actions</th>
             </tr>
 
-            <tr>
-                <td colspan="6" style="text-align:center; padding:20px;">
-                    No jobs found. Create your first job to get started!
-                </td>
-            </tr>
+            <!-- DYNAMIC JOBS GO HERE -->
+            <tbody class="dashboard-table-body"></tbody>
+
         </table>
     </div>
 
@@ -81,9 +79,7 @@
     </div>
 
 </div>
+
 <script src="script.js"></script>
 </body>
 </html>
-
-
-
