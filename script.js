@@ -1,4 +1,4 @@
-// Handle Create Job
+
 const form = document.getElementById("jobForm");
 
 if (form) {
@@ -27,12 +27,13 @@ if (form) {
 }
 
 
-// Load Jobs on jobs.html
+
+// ===============================
+// LOAD JOB LIST (jobs.html)
+// ===============================
 const jobsTable = document.getElementById("jobsTable");
 
-if (jobsTable) {
-    loadJobs();
-}
+if (jobsTable) loadJobs();
 
 function loadJobs() {
     const jobs = JSON.parse(localStorage.getItem("jobs") || "[]");
@@ -56,43 +57,58 @@ function loadJobs() {
     });
 }
 
+
+
+// ===============================
+// JOB ACTIONS
+// ===============================
 function startJob(i) {
     let jobs = JSON.parse(localStorage.getItem("jobs"));
     jobs[i].status = "Running";
     localStorage.setItem("jobs", JSON.stringify(jobs));
-    loadJobs();
-    loadAdminJobs();
-    updateDashboard();
+
+    reloadAll();
 }
 
 function completeJob(i) {
     let jobs = JSON.parse(localStorage.getItem("jobs"));
     jobs[i].status = "Completed";
     localStorage.setItem("jobs", JSON.stringify(jobs));
-    loadJobs();
-    loadAdminJobs();
-    updateDashboard();
+
+    reloadAll();
 }
 
 function deleteJob(i) {
     let jobs = JSON.parse(localStorage.getItem("jobs"));
     jobs.splice(i, 1);
     localStorage.setItem("jobs", JSON.stringify(jobs));
-    loadJobs();
-    loadAdminJobs();
-    updateDashboard();
+
+    reloadAll();
 }
 
 
-// DASHBOARD
+
+// Reload Dashboard + Admin + Jobs Page
+function reloadAll() {
+    if (jobsTable) loadJobs();
+    if (document.getElementById("adminJobsTable")) loadAdminJobs();
+    updateDashboard();
+    updateAdminPanel();
+}
+
+
+
+// ===============================
+// DASHBOARD SUPPORT
+// ===============================
 function updateDashboard() {
     const totalJobs = document.getElementById("totalJobs");
+    if (!totalJobs) return;  // Not on dashboard page
+
     const completedJobs = document.getElementById("completedJobs");
     const runningJobs = document.getElementById("runningJobs");
     const successRate = document.getElementById("successRate");
     const recentJobs = document.getElementById("recentJobs");
-
-    if (!totalJobs) return; // Not on dashboard
 
     const jobs = JSON.parse(localStorage.getItem("jobs") || "[]");
 
@@ -107,7 +123,7 @@ function updateDashboard() {
 
     successRate.innerText = success + "%";
 
-    // recent jobs
+    // load recent jobs
     recentJobs.innerHTML = "";
     jobs.slice(-5).reverse().forEach(job => {
         recentJobs.innerHTML += `
@@ -124,12 +140,32 @@ function updateDashboard() {
 updateDashboard();
 
 
-// ADMIN PANEL SUPPORT
+
+// ===============================
+// ADMIN PANEL FUNCTIONS
+// ===============================
+function updateAdminPanel() {
+    const adminTotal = document.getElementById("adminTotal");
+    if (!adminTotal) return;  // Not on admin page
+
+    const adminCompleted = document.getElementById("adminCompleted");
+    const adminPending = document.getElementById("adminPending");
+
+    const jobs = JSON.parse(localStorage.getItem("jobs") || "[]");
+
+    adminTotal.innerText = jobs.length;
+    adminCompleted.innerText = jobs.filter(j => j.status === "Completed").length;
+    adminPending.innerText = jobs.filter(j => j.status === "Pending").length;
+}
+
+updateAdminPanel();
+
+
+
+// Load jobs inside admin table
 const adminTable = document.getElementById("adminJobsTable");
 
-if (adminTable) {
-    loadAdminJobs();
-}
+if (adminTable) loadAdminJobs();
 
 function loadAdminJobs() {
     if (!adminTable) return;
@@ -149,4 +185,3 @@ function loadAdminJobs() {
         `;
     });
 }
-
